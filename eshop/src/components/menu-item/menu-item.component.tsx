@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const MenuItem: React.FC<IProps> = ({ section }) => {
-  console.log(section);
+  //console.log(section);
   return (
     <div
       className={`${section.size ? section.size + " menu-item" : "menu-item"}`}
