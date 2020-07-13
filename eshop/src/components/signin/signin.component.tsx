@@ -6,17 +6,22 @@ import { CustomButton } from "../common/controls/button/button.component";
 import {signinWithGoogle} from '../../firebase/firebase.config'
 import {auth,createUserProfileDocument} from '../../firebase/firebase.config'
 import './signin.styles.scss'
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
 export const Signin: React.FC = () => {
   const [signinValues, setFormValues] = useState(new LoginFormValues());
+  const dispatch = useDispatch();
 
   const handleSubmitForm = async (values: IloginForm) => {
     if(values){
         console.log(values);
         const {email,password} = values;
         try {
-          var user = await auth.signInWithEmailAndPassword(email!,password!);
-          debugger;
+          var user = await auth.signInWithEmailAndPassword(email!,password!).then(()=>{
+            //dispatch(setCurrentUser(user))
+          }).catch((err)=>console.log(err));
+          
           const reset = new LoginFormValues();
           setFormValues(reset);
         } catch (error) {
@@ -44,8 +49,8 @@ export const Signin: React.FC = () => {
               <Field name="email" type='input' label='Email' component={TextInput2} placeholder="email" />
               <Field name="password" type="password" label="Password" component={TextInput2} placeholder="password" />              
               <div className="buttons">
-              <CustomButton type="submit" isGoogleSignIn={false}>Signin</CustomButton>
-              <CustomButton onClick={signinWithGoogle} isGoogleSignIn={true}>Signin with Google</CustomButton>
+              <CustomButton type="submit" isGoogleSignIn={false} inverted={false}>Signin</CustomButton>
+              <CustomButton onClick={signinWithGoogle} isGoogleSignIn={true} inverted={false} type="button">Signin with Google</CustomButton>
               </div>
             </div>
           </form>

@@ -15,7 +15,7 @@ export const Signup: React.FC = () => {
           const {email,password,displayName,confirmPassword} = values;
           try {
             var user = await auth.createUserWithEmailAndPassword(email!,password!);
-            await createUserProfileDocument(user,{displayName});    
+            await createUserProfileDocument(user,{displayName});
             setFormValues(new SignupFormValues());
           } catch (error) {
               console.log(error);
@@ -43,7 +43,7 @@ export const Signup: React.FC = () => {
                 <Field name="confirmPassword" type="password" label="Confirm Password" component={TextInput2} placeholder="ConfirmPassword" />
 
                 <div className="buttons">
-                <CustomButton type="submit" isGoogleSignIn={false} >Signup</CustomButton>
+                <CustomButton type="submit" isGoogleSignIn={false} inverted={false} >Signup</CustomButton>
                 </div>
               </div>
             </form>
