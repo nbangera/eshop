@@ -8,19 +8,16 @@ import { SigninSignupPage } from "./pages/signin-singup/signin-signup.component"
 import { auth, createUserProfileDocument } from "./firebase/firebase.config";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
-import { findAllByDisplayValue } from "@testing-library/react";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import CheckoutPage from "./pages/checkout/checkout.component";
 
 function App() {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector(selectCurrentUser);
   console.log(JSON.stringify(currentUser));
   const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      // user ? setAuthUser(user)
-      //         : setAuthUser(null);
-      
-      //sign-in
       if (user) {
         const userRef = await createUserProfileDocument(user);
         if (userRef) {
@@ -52,6 +49,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage}></Route>
         <Route path="/shop" component={ShopPage}></Route>
+        <Route path="/checkout" component={CheckoutPage}></Route>
         <Route
           exact
           path="/signin"

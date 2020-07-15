@@ -6,22 +6,24 @@ import { auth } from "../../firebase/firebase.config";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { configOptions } from "final-form";
 import { setCurrentUser } from "../../redux/user/user.actions";
-import CartIcon from '../cart-icon/cart-icon.component'
+import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+// import { selectCartHidden } from "../../redux/cart/cart.selector";
+// import { selectCurrentUser } from "../../redux/user/user.selector";
+import { headerContent } from "../../redux/selector";
 
 // interface IProps{
 //     currentUser:any
 // }
 
 const Header: React.FC = () => {
-  const currentUser = useSelector((state: any) => state.user.currentUser);
-  const cartHidden = useSelector((state: any) => state.cart.hidden);
-  //const [currentUser,setUser]  = useSelector((state: any) => state.user);
-  //   useEffect(() => {
-  //     //setUser();
+  //   const currentUser = useSelector(selectCurrentUser);
+  //   const cartHidden = useSelector(selectCartHidden);
 
-  //   }, [])
-  const dispatch = useDispatch();
+  const currentUser = headerContent(useSelector((state) => state)).user;
+  const cartHidden = headerContent(useSelector((state) => state)).cart;
+
+  //const dispatch = useDispatch();
   console.log("from header");
   console.log(JSON.stringify(currentUser));
   return (
@@ -36,24 +38,23 @@ const Header: React.FC = () => {
         <Link className="option" to="/contact">
           Contact
         </Link>
-        {currentUser? (
+        {currentUser ? (
           <div
             className="option"
             onClick={() => {
-              auth.signOut().then(() => {
-                //dispatch(setCurrentUser(null));
-              });
+              auth.signOut()
             }}
-          >Signout</div>
-        ):(
+          >
+            Signout
+          </div>
+        ) : (
           <Link className="option" to="/signin">
             Signin
           </Link>
         )}
-         <CartIcon></CartIcon>
+        <CartIcon></CartIcon>
       </div>
-      {cartHidden?null:(<CartDropdown></CartDropdown>)}
-      
+      {cartHidden ? null : <CartDropdown></CartDropdown>}
     </div>
   );
 };
