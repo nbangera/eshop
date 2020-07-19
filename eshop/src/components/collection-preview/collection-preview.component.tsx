@@ -1,6 +1,6 @@
 import React from "react";
 import "./collection-preview.styles.scss";
-import { IShop, IShopItem } from "../../pages/shop/shop-data";
+import { IShop, IShopItem } from "../../models/shop";
 import { CollectionItem } from "../collection-item/collection-item.component";
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
 
 export const CollectionPreview: React.FC<IProps> = ({ title, items }) => {
   return (
-    <div className="collection-preview">
+    <div className="collection-preview">   
       <h1 className="title">{title.toUpperCase()}</h1>
       <div className="preview">
         {items

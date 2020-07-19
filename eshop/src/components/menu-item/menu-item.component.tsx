@@ -2,6 +2,7 @@ import React from "react";
 import "./menu-item.styles.scss";
 import { ISection } from "../../models/section";
 import { BackgroundImage } from "../common/backgrounImage.component";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 interface IProps {
   section: ISection;
@@ -9,9 +10,12 @@ interface IProps {
 
 const MenuItem: React.FC<IProps> = ({ section }) => {
   //console.log(section);
+  const history = useHistory();
+  const match = useRouteMatch()
   return (
     <div
       className={`${section.size ? section.size + " menu-item" : "menu-item"}`}
+      onClick={() => history.push(`${match.url}${section.linkUrl}`)}
     >
       <div
         className={"background-image"}

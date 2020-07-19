@@ -41,7 +41,7 @@ function App() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

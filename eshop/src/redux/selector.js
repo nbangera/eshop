@@ -13,3 +13,4 @@ export const cartContent = createStructuredSelector({
   totalPrice:selectCartItemTotalPrice
 });
 
+

@@ -1,7 +1,7 @@
 import React from "react";
 import "./collection-item.styles.scss";
 import { BackgroundImage } from "../common/backgrounImage.component";
-import { IShopItem } from "../../pages/shop/shop-data";
+import { IShopItem } from "../../models/shop";
 import { CustomButton } from "../common/controls/button/button.component";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../redux/cart/cart.actions";

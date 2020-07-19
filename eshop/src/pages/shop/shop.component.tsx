@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { IShop, SHOP_DATA } from "./shop-data";
-import { CollectionPreview } from "../../components/collection-preview/collection-preview.component";
+import CollectionOverview from "../../components/collection-overview/collection-overview.component";
+import { Route, useRouteMatch } from "react-router-dom";
+import Collection from "../../components/collection/collection.component";
 
-export const ShopPage = () => {
-  const [collection, setcollection] = useState<IShop[]>();
-
-  useEffect(() => {
-    setcollection(SHOP_DATA);
-  });
-
+export const ShopPage = () => {  
+  const match = useRouteMatch();
+  
   return (
-    <div>
-      {collection?.map((item, idx) => (
-        <CollectionPreview
-          key={idx}
-          title={item.title}
-          items={item.items}
-        ></CollectionPreview>
-      ))}
+    <div className='shop-page'>
+     <Route exact path={`${match.path}`} component={CollectionOverview}></Route>
+     <Route  path={`${match.path}/:categoryId`} component={Collection}></Route>
     </div>
   );
 };
